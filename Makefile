@@ -19,7 +19,7 @@ _RED=$ \x1b[31m
 NAME = libftprintf.a
 EXEC = test
 CC = gcc
-#FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 
 SRC_DIR = ./
 OBJ_DIR = obj/
@@ -38,6 +38,8 @@ SRC_LIST = ft_printf.c\
 		   ft_strnew.c\
 		   ft_bzero.c\
 		   ft_memset.c\
+		   ft_memalloc.c\
+		   ft_strjoin.c\
 		   ft_utoa_base.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))

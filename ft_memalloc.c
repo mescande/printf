@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mescande <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/09 15:05:54 by mescande          #+#    #+#             */
-/*   Updated: 2020/03/09 15:15:59 by mescande         ###   ########.fr       */
+/*   Created: 2019/04/05 13:34:57 by mescande          #+#    #+#             */
+/*   Updated: 2019/04/09 20:33:51 by mescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_utoa_base(unsigned int value, int big)
+void	*ft_memalloc(size_t size)
 {
-	char	*rep;
-	char	buf[50];
-	char	*ptr;
+	char	*res;
 
-	ptr = &buf[49];
-	rep = (big ? "0123456789ABCDEF" : "0123456789abcdef");
-	*ptr = '\0';
-	if (value == 0)
-		*--ptr = rep[value % 16];
-	while (value != 0)
-	{
-		*--ptr = rep[value % 16];
-		value /= 16;
-	}
-	return (ft_strdup(ptr));
+	res = malloc(size);
+	if (res == NULL)
+		return (NULL);
+	while (--size != 0)
+		res[size] = 0;
+	res[0] = 0;
+	return ((void *)res);
 }

@@ -108,13 +108,21 @@ int		main(void)
 	char	*u = "-0";
 /*	ft_printf("%*.*d%d%d%*s@\n", 8, -10, 42, 56, 3, 4, 0);
 	   printf("%*.*d%d%d%*s$\n", 8, -10, 42, 56, 3, 4, 0);*/
-	printf(" --- Return : %d\n", ft_printf("%-0.0d %d", l, 12)); //T21
+/*	printf(" --- Return : %d\n", ft_printf("%0*.*u", 4, 2, 8)); //T21
+	printf(" --- Return : %d\n",    printf("%0*.*u", 4, 2, 8)); //T21
+	printf(" --- Return : %d\n", ft_printf("%0*.*x", 4, 2, 8)); //T21
+	printf(" --- Return : %d\n",    printf("%0*.*x", 4, 2, 8)); //T21
+*//*	printf(" --- Return : %d\n", ft_printf("%-0.0d %d", l, 12)); //T21
 	printf(" --- Return : %d\n",    printf("%-0.0d %d", l, 12)); //T21
 	printf(" --- Return : %d\n", ft_printf("%-.d", l)); //T17
 	printf(" --- Return : %d\n",    printf("%-.d", l)); //T17
 	a = 4;
 	printf(" --- Return : %d\n", ft_printf("%0*i, %0*d, %0*d, %0*d, %0*d, %0*d, %0*d, %0*d", a, i, a, j, a, k, a, l, a, m, a, c, a, e, a, d));
 	printf(" --- Return : %d\n", printf("%0*i, %0*d, %0*d, %0*d, %0*d, %0*d, %0*d, %0*d", a, i, a, j, a, k, a, l, a, m, a, c, a, e, a, d));
+*/
+	printf(" --- Return : %d\n", ft_printf("%c, %-c, %12c, %-3c, %-1c, %1c, %-2c, %-4c, %5c, %3c, %-*c, %-*c, %*c, %*c", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0));
+	printf(" --- Return : %d\n",    printf("%c, %-c, %12c, %-3c, %-1c, %1c, %-2c, %-4c, %5c, %3c, %-*c, %-*c, %*c, %*c", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0));
+	fflush(stdout);
 /*	while (1);
 		;
 */	return (0);

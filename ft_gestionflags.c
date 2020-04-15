@@ -61,7 +61,6 @@ int		isflag(char c)
 
 int		wichflag(int *flags)
 {
-//	printf("FLAGS : %d, %d, %d, %d, %d\n", flags[0], flags[PLUSS], flags[MOINS], flags[PRECI], flags[VPREC]);
 	if (flags[VPREC])
 		return (PRECI);
 	if (flags[MOINS])

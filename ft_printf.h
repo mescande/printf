@@ -47,27 +47,30 @@ int				ft_atoi(const char *str);
 size_t			ft_strlen(const char *s);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 char			*ft_strdup(const char *s1);
+char			*ft_strjoin(const char *s1, char *s2);
 char			*ft_itoa(long int n);
 char			*ft_strnew(size_t size);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
+void			*ft_memalloc(size_t i);
 char			*ft_utoa_base(unsigned int value, int big);
 
-char			*conv_c(int *flags, va_list args);
+char			*conv_c(int *flags, va_list args, t_list **lst);
 char			*conv_s(int *flags, va_list args, int k);
 char			*conv_p(int *flags, va_list args);
 char			*conv_d(int *flags, va_list args, char fil);
 
+char			*fillme(int *flags, char fil, char *res);
 char			*conv_u(int *flags, va_list args, char fil);
 char			*conv_x(int *flags, va_list args, char fil);
 char			*conv_bigx(int *flags, va_list args, char fil);
-char			*conv_pourcent(int *flags, va_list args);
+char			*conv_pourcent(int *flags);
 
 char			*youdontwannadothis(char *tofree, char *ret);
 int				isnum(char c);
 int				precision_in_conv_s(int i, int *flags, char *var);
 char			*precision_in_conv_d(char *res, int *flags, int len);
-char			*ft_putitin(int *flags, char c, va_list args);
+char			*ft_putitin(int *flags, char c, va_list args, t_list **lst);
 
 void			initflags(int *flags);
 int				*verifflags(int *flags);

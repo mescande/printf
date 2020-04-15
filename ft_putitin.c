@@ -63,19 +63,17 @@ char	*precision_in_conv_d(char *res, int *flags, int len)
 	return (res);
 }
 
-char	*ft_putitin(int *flags, char c, va_list args)
+char	*ft_putitin(int *flags, char c, va_list args, t_list **lst)
 {
 	flags = verifflags(flags);
 	if (c == 'c')
-		return (conv_c(flags, args));
+		return (conv_c(flags, args, lst));
 	if (c == 's')
 		return (conv_s(flags, args, 0));
 	if (c == 'p')
 		return (conv_p(flags, args));
 	if (c == 'd' || c == 'i')
 		return (conv_d(flags, args, (flags[ZEROS] ? '0' : ' ')));
-//	write(1, &c, 1);
-//	write(1, "\n", 1);
 	if (c == 'u')
 		return (conv_u(flags, args, (flags[ZEROS] ? '0' : ' ')));
 	if (c == 'x')
@@ -83,6 +81,6 @@ char	*ft_putitin(int *flags, char c, va_list args)
 	if (c == 'X')
 		return (conv_bigx(flags, args, (flags[ZEROS] ? '0' : ' ')));
 	if (c == '%')
-		return (conv_pourcent(flags, args));
+		return (conv_pourcent(flags));
 	return (NULL);
 }

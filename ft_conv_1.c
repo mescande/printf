@@ -12,7 +12,9 @@
 
 #include "ft_printf.h"
 
-char	*conv_c(int *flags, va_list args)
+
+
+char	*conv_c(int *flags, va_list args, t_list **lst)
 {
 	char	c;
 	char	*res;
@@ -32,6 +34,12 @@ char	*conv_c(int *flags, va_list args)
 		res[i++] = fil;
 	res[i++] = (flags[MOINS] ? fil : c);
 	res[i] = 0;
+	if (c == 0 && !(i = 0))
+	{
+		while (i < len || i == 0)
+			*lst = addchar(*lst, res[i++]);
+		res[0] = 0;
+	}
 	return (res);
 }
 
@@ -63,7 +71,23 @@ char	*conv_s(int *flags, va_list args, int k)
 
 char	*conv_p(int *flags, va_list args)
 {
-	return (NULL);
+	unsigned long long	val;
+	char				*res;
+
+	(void)flags;
+	val = (unsigned long long)va_arg(args, void *);
+	if (val == 0)
+		res = ft_strdup("(nil)");
+	else
+	{
+		if (!(res = ft_utoa_base(val, 0)))
+			return (NULL);
+		if (!(res = ft_strjoin("0x", res)))
+			return (NULL);
+	}
+	if (flags[wichflag(flags)] > (int)ft_strlen(res))
+		res = fillme(flags, (flags[ZEROS] ? '0' : ' '), res);
+	return (res);
 }
 
 char	*conv_d(int *flag, va_list args, char f)
@@ -71,36 +95,18 @@ char	*conv_d(int *flag, va_list args, char f)
 	int		var;
 	int		len;
 	char	*res;
-	char	*tmp;
-	int		i;
 
 	var = va_arg(args, int);
 	if (!(res = ft_itoa(var)))
 		return (NULL);
-	i = 0;
 	if (flag[VPREC] && flag[PRECI] == 0 && res[0] == '0' && !(flag[VPREC] = 0))
 		res = youdontwannadothis(res, ft_strnew(0));
 	len = ft_strlen(res);
 	if (flag[VPREC] && flag[PRECI] > (res[0] == '-' ? len - 1 : len))
 		if (!(res = precision_in_conv_d(res, flag, len)))
 			return (youdontwannadothis(res, NULL));
-	len = ft_strlen(res);
 	flag[VPREC] = 0;
-	if (flag[((var = -1) == 0) + wichflag(flag)] > (int)ft_strlen(res))
-	{
-		tmp = res;
-		if (!(res = (char *)malloc(flag[wichflag(flag)])))
-			return (NULL);
-		(f == '0' && tmp[0] ==  '-' ? res[var++ + 1] = '-' + (i++ == -2) +
-		 (len-- == 0) : var);
-		while (++var < flag[wichflag(flag)])
-		{
-			if (flag[MOINS])
-				res[var] = (var < len ? tmp[var] : ' ');
-			else
-				res[var] = (var >= flag[wichflag(flag)] - len ? tmp[i++] : f);
-		}
-		free(tmp);
-	}
+	if (flag[wichflag(flag)] > (int)ft_strlen(res))
+		res = fillme(flag, f, res);
 	return (res);
 }

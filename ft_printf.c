@@ -71,13 +71,10 @@ int		workonstr(const char *str, int i, va_list args, t_list **lst)
 					va_arg(args, int) + (j++ == 0));
 		while (isnum(str[i + j]))
 			j++;
-//		printf("str[i + j] = %c\n", str[i + j]);
 		if (str[i + j] == '.')
 			flags[VPREC] = (j++ > 0);
-//		printf("FLAGS : %d, %d, %d, %d, %d\n", flags[0], flags[PLUSS], flags[MOINS], flags[PRECI], flags[VPREC]);
 	}
-	lst = addstr(lst, ft_putitin(flags, str[i + j], args));
-//	write(1, "coucou\n", 7);
+	lst = addstr(lst, ft_putitin(flags, str[i + j], args, lst));
 	return ((lst ? i + j + 1 : 0));
 }
 
@@ -106,9 +103,6 @@ int		ft_printf(const char *str, ...)
 				lst = lst->next;
 		}
 	}
-	/*	join;
-	write(1, "bouh\n", 5);
-		write;*/
 	ret = 0;
 	while (start)
 	{
