@@ -72,3 +72,21 @@ int		wichflag(int *flags)
 		return (ZEROS);
 	return (PLUSS);
 }
+
+int		printit(t_list *start)
+{
+	int		res;
+	t_list	*tmp;
+
+	res = 0;
+	while (start)
+	{
+		write(1, start->str, start->len);
+		res += start->len;
+		tmp = start;
+		start = start->next;
+		free(tmp->str);
+		free(tmp);
+	}
+	return (res);
+}

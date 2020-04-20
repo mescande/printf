@@ -76,6 +76,7 @@ void			initflags(int *flags);
 int				*verifflags(int *flags);
 int				isflag(char c);
 int				wichflag(int *flags);
+int				printit(t_list *start);
 
 t_list			*newelem(void);
 t_list			*addchar(t_list *lst, char c);

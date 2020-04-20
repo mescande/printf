@@ -84,7 +84,6 @@ int		ft_printf(const char *str, ...)
 	t_list	*start;
 	int		i;
 	va_list	args;
-	int		ret;
 
 	if (!(lst = newelem()))
 		return (0);
@@ -103,13 +102,6 @@ int		ft_printf(const char *str, ...)
 				lst = lst->next;
 		}
 	}
-	ret = 0;
-	while (start)
-	{
-		write(1, start->str, start->len);
-		ret += start->len;
-		start = start->next;
-	}
 	va_end(args);
-	return (ret);
+	return (printit(start));
 }
