@@ -6,13 +6,11 @@
 /*   By: mescande <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:04:17 by mescande          #+#    #+#             */
-/*   Updated: 2020/03/09 13:25:57 by mescande         ###   ########.fr       */
+/*   Updated: 2020/04/20 12:31:30 by mescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
 
 char	*conv_c(int *flags, va_list args, t_list **lst)
 {
@@ -76,15 +74,10 @@ char	*conv_p(int *flags, va_list args)
 
 	(void)flags;
 	val = (unsigned long long)va_arg(args, void *);
-	if (val == 0)
-		res = ft_strdup("(nil)");
-	else
-	{
-		if (!(res = ft_utoa_base(val, 0)))
-			return (NULL);
-		if (!(res = ft_strjoin("0x", res)))
-			return (NULL);
-	}
+	if (!(res = ft_utoa_base(val, 0)))
+		return (NULL);
+	if (!(res = ft_strjoin("0x", res)))
+		return (NULL);
 	if (flags[wichflag(flags)] > (int)ft_strlen(res))
 		res = fillme(flags, (flags[ZEROS] ? '0' : ' '), res);
 	return (res);

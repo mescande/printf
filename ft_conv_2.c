@@ -6,13 +6,13 @@
 /*   By: mescande <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:04:17 by mescande          #+#    #+#             */
-/*   Updated: 2020/03/09 15:19:00 by mescande         ###   ########.fr       */
+/*   Updated: 2020/04/20 12:34:59 by mescande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*fillme(int *flags, char f, char *res)
+char	*fillme(int *flag, char f, char *res)
 {
 	char	*tmp;
 	int		var;
@@ -23,27 +23,25 @@ char	*fillme(int *flags, char f, char *res)
 	i = 0;
 	var = -1;
 	len = ft_strlen(res);
-	if (!(res = (char *)ft_memalloc(flags[wichflag(flags)])))
+	if (!(res = (char *)ft_memalloc(flag[wichflag(flag)])))
 		return (NULL);
 	if (f == '0' && tmp[0] == '-')
 	{
-		res[0] = '-';
-		i++;
-		var++;
+		res[(i++ == -2)] = (var++ == -2) + '-';
 		len--;
 	}
-	while (++var < flags[wichflag(flags)])
+	while (++var < flag[wichflag(flag)])
 	{
-		if (flags[MOINS])
+		if (flag[MOINS])
 			res[var] = (var < len ? tmp[var] : ' ');
 		else
-			res[var] = (var >= flags[wichflag(flags)] - len ? tmp[i++] : f);
+			res[var] = (var >= flag[wichflag(flag)] - len ? tmp[i++] : f);
 	}
 	free(tmp);
 	return (res);
 }
 
-char	*conv_u(int *flags, va_list args, char f)
+char	*conv_u(int *flag, va_list args, char f)
 {
 	unsigned int	var;
 	int				len;
@@ -52,19 +50,19 @@ char	*conv_u(int *flags, va_list args, char f)
 	var = (unsigned)va_arg(args, int);
 	if (!(res = ft_itoa(var)))
 		return (NULL);
-	if (flags[VPREC] && flags[PRECI] == 0 && res[0] == '0' && !(flags[VPREC] = 0))
+	if (flag[VPREC] && flag[PRECI] == 0 && res[0] == '0' && !(flag[VPREC] = 0))
 		res = youdontwannadothis(res, ft_strnew(0));
 	len = ft_strlen(res);
-	if (flags[VPREC] && flags[PRECI] > (res[0] == '-' ? len - 1 : len))
-		if (!(res = precision_in_conv_d(res, flags, len)))
+	if (flag[VPREC] && flag[PRECI] > (res[0] == '-' ? len - 1 : len))
+		if (!(res = precision_in_conv_d(res, flag, len)))
 			return (youdontwannadothis(res, NULL));
-	flags[VPREC] = 0;
-	if (flags[wichflag(flags)] > (int)ft_strlen(res))
-		res = fillme(flags, f, res);
+	flag[VPREC] = 0;
+	if (flag[wichflag(flag)] > (int)ft_strlen(res))
+		res = fillme(flag, f, res);
 	return (res);
 }
 
-char	*conv_x(int *flags, va_list args, char f)
+char	*conv_x(int *flag, va_list args, char f)
 {
 	unsigned int	var;
 	int				len;
@@ -73,20 +71,20 @@ char	*conv_x(int *flags, va_list args, char f)
 	var = (unsigned)va_arg(args, int);
 	if (!(res = ft_utoa_base(var, 0)))
 		return (NULL);
-	if (flags[VPREC] && flags[PRECI] == 0 && res[0] == '0' && !(flags[VPREC] = 0))
+	if (flag[VPREC] && flag[PRECI] == 0 && res[0] == '0' && !(flag[VPREC] = 0))
 		res = youdontwannadothis(res, ft_strnew(0));
 	len = ft_strlen(res);
-	if (flags[VPREC] && flags[PRECI] > (res[0] == '-' ? len - 1 : len))
-		if (!(res = precision_in_conv_d(res, flags, len)))
+	if (flag[VPREC] && flag[PRECI] > (res[0] == '-' ? len - 1 : len))
+		if (!(res = precision_in_conv_d(res, flag, len)))
 			return (youdontwannadothis(res, NULL));
 	len = ft_strlen(res);
-	flags[VPREC] = 0;
-	if (flags[wichflag(flags)] > (int)ft_strlen(res))
-		res = fillme(flags, f, res);
+	flag[VPREC] = 0;
+	if (flag[wichflag(flag)] > (int)ft_strlen(res))
+		res = fillme(flag, f, res);
 	return (res);
 }
 
-char	*conv_bigx(int *flags, va_list args, char f)
+char	*conv_bigx(int *flag, va_list args, char f)
 {
 	unsigned int	var;
 	int				len;
@@ -95,20 +93,20 @@ char	*conv_bigx(int *flags, va_list args, char f)
 	var = (unsigned)va_arg(args, int);
 	if (!(res = ft_utoa_base(var, 1)))
 		return (NULL);
-	if (flags[VPREC] && flags[PRECI] == 0 && res[0] == '0' && !(flags[VPREC] = 0))
+	if (flag[VPREC] && flag[PRECI] == 0 && res[0] == '0' && !(flag[VPREC] = 0))
 		res = youdontwannadothis(res, ft_strnew(0));
 	len = ft_strlen(res);
-	if (flags[VPREC] && flags[PRECI] > (res[0] == '-' ? len - 1 : len))
-		if (!(res = precision_in_conv_d(res, flags, len)))
+	if (flag[VPREC] && flag[PRECI] > (res[0] == '-' ? len - 1 : len))
+		if (!(res = precision_in_conv_d(res, flag, len)))
 			return (youdontwannadothis(res, NULL));
 	len = ft_strlen(res);
-	flags[VPREC] = 0;
-	if (flags[wichflag(flags)] > (int)ft_strlen(res))
-		res = fillme(flags, f, res);
+	flag[VPREC] = 0;
+	if (flag[wichflag(flag)] > (int)ft_strlen(res))
+		res = fillme(flag, f, res);
 	return (res);
 }
 
-char	*conv_pourcent(int *flags)
+char	*conv_pourcent(int *flag)
 {
 	char	c;
 	char	*res;
@@ -117,16 +115,16 @@ char	*conv_pourcent(int *flags)
 	int		i;
 
 	c = '%';
-	fil = (flags[ZEROS] ? '0' : ' ');
-	len = flags[MOINS] + flags[ZEROS] + flags[PLUSS];
+	fil = (flag[ZEROS] ? '0' : ' ');
+	len = flag[MOINS] + flag[ZEROS] + flag[PLUSS];
 	i = 0;
 	if (!(res = (char *)malloc(len)))
 		return (NULL);
-	if (flags[MOINS])
+	if (flag[MOINS])
 		res[i++] = c;
 	while (i < len - 1)
 		res[i++] = fil;
-	res[i++] = (flags[MOINS] ? fil : c);
+	res[i++] = (flag[MOINS] ? fil : c);
 	res[i] = 0;
 	return (res);
 }
