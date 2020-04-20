@@ -30,8 +30,8 @@ char	*conv_c(int *flags, va_list args, t_list **lst)
 		res[i++] = c;
 	while (i < len - 1)
 		res[i++] = fil;
-	res[i++] = (flags[MOINS] && i < len ? fil : c);
-	res[i] = 0;
+	res[i++] = (flags[MOINS] ? fil : c);
+	res[(i > len ? len : i)] = 0;
 	if (c == 0 && !(i = 0))
 	{
 		while (i < len || i == 0)
