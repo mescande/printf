@@ -24,14 +24,14 @@ char	*conv_c(int *flags, va_list args, t_list **lst)
 	fil = (flags[ZEROS] ? '0' : ' ');
 	len = flags[MOINS] + flags[ZEROS] + flags[PLUSS];
 	i = 0;
-	if (!(res = (char *)malloc(len)))
+	if (!(res = (char *)malloc(len + 1)))
 		return (NULL);
 	if (flags[MOINS])
 		res[i++] = c;
 	while (i < len - 1)
 		res[i++] = fil;
 	res[i++] = (flags[MOINS] ? fil : c);
-	res[(i > len ? len : i)] = 0;
+	res[(i > len && len != 0 ? len : i)] = 0;
 	if (c == 0 && !(i = 0))
 	{
 		while (i < len || i == 0)
