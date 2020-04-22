@@ -123,6 +123,6 @@ char	*conv_pourcent(int *flag)
 	while (i < len - 1)
 		res[i++] = fil;
 	res[i++] = (flag[MOINS] ? fil : c);
-	res[i] = 0;
+	res[(i > len && len != 0 ? len : i)] = 0;
 	return (res);
 }
