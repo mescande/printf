@@ -23,13 +23,10 @@ char	*fillme(int *flag, char f, char *res)
 	i = 0;
 	var = -1;
 	len = ft_strlen(res);
-	if (!(res = (char *)ft_memalloc(flag[wichflag(flag)])))
+	if (!(res = (char *)ft_memalloc(flag[wichflag(flag)] + 1)))
 		return (NULL);
 	if (f == '0' && tmp[0] == '-')
-	{
-		res[(i++ == -2)] = (var++ == -2) + '-';
-		len--;
-	}
+		res[(i++ == -2)] = (var++ == -2) + '-' + (len-- == -2);
 	while (++var < flag[wichflag(flag)])
 	{
 		if (flag[MOINS])
@@ -38,6 +35,7 @@ char	*fillme(int *flag, char f, char *res)
 			res[var] = (var >= flag[wichflag(flag)] - len ? tmp[i++] : f);
 	}
 	free(tmp);
+	res[var] = 0;
 	return (res);
 }
 

@@ -61,7 +61,7 @@ $(DIR):
 	@mkdir -p $@
 
 $(EXEC): $(OBJ) $(MAIN)
-	@$(CC) $(FLAGS) $^ -o $@
+	@$(CC) $^ -o $@
 	@echo "$(_BLUE)Compilation $(_GREEN)DONE !$(_WHITE)\r"
 
 clean:
