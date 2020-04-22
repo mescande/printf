@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char	*ft_utoa_base(unsigned int value, int big)
+char	*ft_utoa_base(unsigned long long value, int big)
 {
 	char	*rep;
 	char	buf[50];

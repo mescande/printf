@@ -53,7 +53,7 @@ char			*ft_strnew(size_t size);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
 void			*ft_memalloc(size_t i);
-char			*ft_utoa_base(unsigned int value, int big);
+char			*ft_utoa_base(unsigned long long value, int big);
 
 char			*conv_c(int *flags, va_list args, t_list **lst);
 char			*conv_s(int *flags, va_list args, int k);
